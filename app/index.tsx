@@ -1,9 +1,15 @@
-import { Button, Text, TextInput, View, FlatList } from "react-native";
+import {
+  Button,
+  Text,
+  TextInput,
+  View,
+  FlatList,
+  StyleSheet,
+} from "react-native";
 import { CharacterItem } from "@/components/CharacterItem";
-import type { ViewStyle, TextStyle } from "react-native";
 import { useSearch } from "@/app/useSearch";
 
-const styles: Record<string, ViewStyle | TextStyle> = {
+const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
@@ -27,20 +33,25 @@ const styles: Record<string, ViewStyle | TextStyle> = {
   list: {
     marginVertical: 16,
   },
-  loadingScreen: {
+  resultIndicator: {
+    marginBottom: 8,
+  },
+  screen: {
     flex: 1,
     alignItems: "center",
     paddingTop: 24,
   },
-  loadingText: {
+  screenText: {
     fontSize: 24,
     color: "gray",
   },
-};
+});
 
 export default function Index() {
   const { isFetching, data, searchTerm, handleTextChange, searchCharacter } =
     useSearch();
+
+  const noResultsMessage = "No results found. The Force is not with you...";
 
   return (
     <View style={styles.container}>
@@ -58,16 +69,23 @@ export default function Index() {
         />
       </View>
       {isFetching && (
-        <View style={styles.loadingScreen}>
-          <Text style={styles.loadingText}>Loading...</Text>
+        <View style={styles.screen}>
+          <Text style={styles.screenText}>Loading...</Text>
         </View>
       )}
-      {!isFetching && data != undefined && data.results.length > 0 && (
-        <FlatList
-          style={styles.list}
-          data={data.results}
-          renderItem={({ item }) => <CharacterItem character={item} />}
-        />
+      {!isFetching && data != undefined && data.results.length === 0 && (
+        <View style={styles.screen}>
+          <Text style={styles.screenText}>{noResultsMessage}</Text>
+        </View>
+      )}
+      {!isFetching && data !== undefined && data.results.length > 0 && (
+        <View style={styles.list}>
+          <Text style={styles.resultIndicator}>{data.count} result(s).</Text>
+          <FlatList
+            data={data.results}
+            renderItem={({ item }) => <CharacterItem character={item} />}
+          />
+        </View>
       )}
     </View>
   );

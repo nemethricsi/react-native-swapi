@@ -1,3 +1,5 @@
+import { BASE_URL } from "@/constants/config";
+
 export interface Character {
   name: string;
   birth_year: string;
@@ -25,7 +27,7 @@ export interface SwapiResponse {
 }
 
 export const getCharactersByName = (name: string): Promise<SwapiResponse> => {
-  return fetch(`https://swapi.dev/api/people/?search=${name}`)
+  return fetch(`${BASE_URL}people/?search=${name}`)
     .then(response => {
       if (!response.ok) {
         throw new Error('Network response was not ok');

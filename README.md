@@ -27,3 +27,9 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
 - Test cases were added using `@testing-library/react-native` because `react-test-renderer` is [deprecated](https://react.dev/blog/2024/04/25/react-19-upgrade-guide#deprecated-react-test-renderer).
 - The app is using a custom hook (`useSearch`) to leverage the search functionality.
 - Next steps could be a _new stack screen_ to display the details of the characters.
+
+## Demo
+
+https://github.com/user-attachments/assets/aea1389b-0b2e-4d6f-bcbc-3e7bb4d17fbd
+
+

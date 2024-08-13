@@ -21,9 +21,20 @@ const styles: Record<string, ViewStyle | TextStyle> = {
     backgroundColor: "white",
     padding: 12,
     borderRadius: 6,
+    borderWidth: 0.5,
+    borderColor: "gray",
   },
   list: {
     marginVertical: 16,
+  },
+  loadingScreen: {
+    flex: 1,
+    alignItems: "center",
+    paddingTop: 24,
+  },
+  loadingText: {
+    fontSize: 24,
+    color: "gray",
   },
 };
 
@@ -38,19 +49,24 @@ export default function Index() {
           style={styles.textInput}
           value={searchTerm}
           onChangeText={handleTextChange}
+          placeholder="Search by name..."
         />
-        <Button title="Search" onPress={searchCharacter} />
+        <Button
+          title="Search"
+          onPress={searchCharacter}
+          disabled={!searchTerm}
+        />
       </View>
       {isFetching && (
-        <View>
-          <Text>Loading...</Text>
+        <View style={styles.loadingScreen}>
+          <Text style={styles.loadingText}>Loading...</Text>
         </View>
       )}
-      {!isFetching && data !== undefined && Array.isArray(data.results) && (
+      {!isFetching && data != undefined && data.results.length > 0 && (
         <FlatList
           style={styles.list}
           data={data.results}
-          renderItem={(item) => <CharacterItem character={item} />}
+          renderItem={({ item }) => <CharacterItem character={item} />}
         />
       )}
     </View>

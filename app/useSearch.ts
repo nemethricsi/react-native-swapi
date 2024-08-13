@@ -15,7 +15,7 @@ export const useSearch = () => {
   }
 
   const handleTextChange = (text: string) => {
-    setSearchTerm(text);
+    setSearchTerm(() => text);
   };
 
   return { isFetching, data, searchTerm, handleTextChange, searchCharacter };

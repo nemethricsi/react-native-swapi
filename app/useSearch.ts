@@ -1,6 +1,7 @@
 import { getCharactersByName } from '@/api/people';
 import type { SwapiResponse } from '@/api/people';
 import { useState } from 'react';
+import { Keyboard } from 'react-native';
 
 export const useSearch = () => {
   const [isFetching, setIsFetching] = useState(false);
@@ -15,6 +16,7 @@ export const useSearch = () => {
       const res = await getCharactersByName(searchTerm);
       setData(res);
       setIsFetching(false);
+      Keyboard.dismiss();
     } catch(error) {
       setIsFetching(false);
       setIsError(true);

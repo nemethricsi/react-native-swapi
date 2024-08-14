@@ -48,8 +48,14 @@ const styles = StyleSheet.create({
 });
 
 export default function Index() {
-  const { isFetching, data, searchTerm, handleTextChange, searchCharacter } =
-    useSearch();
+  const {
+    isFetching,
+    data,
+    searchTerm,
+    handleTextChange,
+    searchCharacter,
+    isError,
+  } = useSearch();
 
   const noResultsMessage = "No results found. The Force is not with you...";
 
@@ -85,6 +91,15 @@ export default function Index() {
             data={data.results}
             renderItem={({ item }) => <CharacterItem character={item} />}
           />
+        </View>
+      )}
+      {isError && (
+        <View style={styles.screen}>
+          <View style={styles.errorMessage}>
+            <Text style={styles.errorMessageText}>
+              Somthething went wrong. Please try again.
+            </Text>
+          </View>
         </View>
       )}
     </View>

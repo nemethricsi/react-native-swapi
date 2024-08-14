@@ -6,17 +6,25 @@ export const useSearch = () => {
   const [isFetching, setIsFetching] = useState(false);
   const [data, setData] = useState<SwapiResponse>();
   const [searchTerm, setSearchTerm] = useState('');
+  const [isError, setIsError] = useState(false);
 
   const searchCharacter = async () => {
-    setIsFetching(true);
-    const res = await getCharactersByName(searchTerm);
-    setData(res);
-    setIsFetching(false);
+    try {
+      setIsFetching(true);
+      setIsError(false);
+      const res = await getCharactersByName(searchTerm);
+      setData(res);
+      setIsFetching(false);
+    } catch(error) {
+      setIsFetching(false);
+      setIsError(true);
+      console.error(error);
+    }
   }
 
   const handleTextChange = (text: string) => {
     setSearchTerm(() => text);
   };
 
-  return { isFetching, data, searchTerm, handleTextChange, searchCharacter };
+  return { isFetching, data, searchTerm, handleTextChange, searchCharacter, isError };
 }

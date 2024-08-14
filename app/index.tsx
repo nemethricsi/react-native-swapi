@@ -33,6 +33,7 @@ const styles = StyleSheet.create({
   },
   list: {
     marginVertical: 16,
+    flex: 1,
   },
   resultIndicator: {
     marginBottom: 8,
@@ -94,15 +95,18 @@ export default function Index() {
           <Text style={styles.screenText}>{noResultsMessage}</Text>
         </View>
       )}
-      {!isFetching && data !== undefined && data.results.length > 0 && (
-        <View style={styles.list}>
-          <Text style={styles.resultIndicator}>{data.count} result(s).</Text>
-          <FlatList
-            data={data.results}
-            renderItem={({ item }) => <CharacterItem character={item} />}
-          />
-        </View>
-      )}
+      {!isFetching &&
+        !isError &&
+        data !== undefined &&
+        data.results.length > 0 && (
+          <View style={styles.list}>
+            <Text style={styles.resultIndicator}>{data.count} result(s).</Text>
+            <FlatList
+              data={data.results}
+              renderItem={({ item }) => <CharacterItem character={item} />}
+            />
+          </View>
+        )}
       {isError && (
         <View style={styles.screen}>
           <View style={styles.errorMessage}>

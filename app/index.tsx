@@ -90,11 +90,14 @@ export default function Index() {
           <ActivityIndicator size="large" />
         </View>
       )}
-      {!isFetching && data != undefined && data.results.length === 0 && (
-        <View style={styles.screen}>
-          <Text style={styles.screenText}>{noResultsMessage}</Text>
-        </View>
-      )}
+      {!isFetching &&
+        !isError &&
+        data != undefined &&
+        data.results.length === 0 && (
+          <View style={styles.screen}>
+            <Text style={styles.screenText}>{noResultsMessage}</Text>
+          </View>
+        )}
       {!isFetching &&
         !isError &&
         data !== undefined &&

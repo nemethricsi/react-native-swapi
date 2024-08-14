@@ -26,7 +26,9 @@ export const CharacterItem = ({ character }: CharacterItemProps) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.name}>{character.name}</Text>
+      <Text style={styles.name}>
+        {character.name} ({character.height} cm)
+      </Text>
     </View>
   );
 };

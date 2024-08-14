@@ -5,6 +5,7 @@ import {
   View,
   FlatList,
   StyleSheet,
+  ActivityIndicator,
 } from "react-native";
 import { CharacterItem } from "@/components/CharacterItem";
 import { useSearch } from "@/app/useSearch";
@@ -39,11 +40,20 @@ const styles = StyleSheet.create({
   screen: {
     flex: 1,
     alignItems: "center",
-    paddingTop: 24,
+    paddingTop: 32,
   },
   screenText: {
     fontSize: 24,
     color: "gray",
+  },
+  errorMessage: {
+    backgroundColor: "#e74c3c",
+    padding: 8,
+    borderRadius: 6,
+  },
+  errorMessageText: {
+    fontSize: 20,
+    color: "white",
   },
 });
 
@@ -76,7 +86,7 @@ export default function Index() {
       </View>
       {isFetching && (
         <View style={styles.screen}>
-          <Text style={styles.screenText}>Loading...</Text>
+          <ActivityIndicator size="large" />
         </View>
       )}
       {!isFetching && data != undefined && data.results.length === 0 && (

@@ -30,6 +30,6 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
 
 ## Demo
 
-https://github.com/user-attachments/assets/aea1389b-0b2e-4d6f-bcbc-3e7bb4d17fbd
+https://github.com/user-attachments/assets/d35c4f61-688e-4676-b3d9-856fc1c9667e
 
 
